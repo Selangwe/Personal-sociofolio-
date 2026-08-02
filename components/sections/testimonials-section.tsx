@@ -28,7 +28,7 @@ export function TestimonialsSection() {
   }, [emblaApi]);
 
   return (
-    <section id="testimonials" className="scroll-mt-32 py-12">
+    <section id="testimonials" aria-label="Client testimonials" className="scroll-mt-32 py-12">
       <SectionHeading
         title="Testimonials"
         subtitle="What clients say about working with me."
@@ -49,12 +49,13 @@ export function TestimonialsSection() {
                   transition={{ duration: 0.4 }}
                   className="h-full rounded-xl border border-border bg-card p-6 shadow-sm"
                 >
-                  <Quote className="h-8 w-8 text-primary/20" />
+                  <Quote className="h-8 w-8 text-primary/20" aria-hidden="true" />
                   <div className="mt-2 flex gap-0.5">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star
                         key={i}
                         className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                        aria-hidden="true"
                       />
                     ))}
                   </div>
@@ -87,14 +88,14 @@ export function TestimonialsSection() {
           className="absolute left-0 top-1/2 -translate-y-1/2 rounded-full border border-border bg-card p-2 text-foreground shadow-sm transition-colors hover:border-primary hover:text-primary"
           aria-label="Previous"
         >
-          <ChevronLeft className="h-5 w-5" />
+          <ChevronLeft className="h-5 w-5" aria-hidden="true" />
         </button>
         <button
           onClick={scrollNext}
           className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full border border-border bg-card p-2 text-foreground shadow-sm transition-colors hover:border-primary hover:text-primary"
           aria-label="Next"
         >
-          <ChevronRight className="h-5 w-5" />
+          <ChevronRight className="h-5 w-5" aria-hidden="true" />
         </button>
 
         <div className="mt-4 flex justify-center gap-2">

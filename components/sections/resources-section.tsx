@@ -21,7 +21,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export function ResourcesSection() {
   return (
-    <section id="resources" className="scroll-mt-32 py-12">
+    <section id="resources" aria-label="Free resources" className="scroll-mt-32 py-12">
       <SectionHeading
         title="Resources"
         subtitle="Free tools, templates, and guides to help you automate and grow."
@@ -41,7 +41,7 @@ export function ResourcesSection() {
               className="group flex items-start gap-4 rounded-xl border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-md"
             >
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                <Icon className="h-6 w-6 text-primary" />
+                <Icon className="h-6 w-6 text-primary" aria-hidden="true" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2">
@@ -61,9 +61,9 @@ export function ResourcesSection() {
                   {resource.description}
                 </p>
                 <button className="mt-3 flex items-center gap-1.5 text-xs font-medium text-primary transition-colors hover:gap-2.5">
-                  <Download className="h-3.5 w-3.5" />
+                  <Download className="h-3.5 w-3.5" aria-hidden="true" />
                   Get Resource
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </button>
               </div>
             </motion.div>
