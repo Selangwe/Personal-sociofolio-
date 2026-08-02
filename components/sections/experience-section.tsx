@@ -8,7 +8,7 @@ import { SkillBadge } from '@/components/ui/skill-badge';
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="scroll-mt-32 py-12">
+    <section id="experience" aria-label="Work experience" className="scroll-mt-32 py-12">
       <SectionHeading
         title="Experience & Education"
         subtitle="My professional journey and academic background."

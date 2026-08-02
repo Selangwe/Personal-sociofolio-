@@ -22,7 +22,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export function AboutSection() {
   return (
-    <section id="about" className="scroll-mt-32 py-12">
+    <section id="about" aria-label="About Samme Samuel" className="scroll-mt-32 py-12">
       <SectionHeading
         title="About Me"
         subtitle="Get to know my story, mission, and what drives my work."

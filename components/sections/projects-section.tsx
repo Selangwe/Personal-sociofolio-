@@ -8,7 +8,7 @@ import { SkillBadge } from '@/components/ui/skill-badge';
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="scroll-mt-32 py-12">
+    <section id="projects" aria-label="Projects portfolio" className="scroll-mt-32 py-12">
       <SectionHeading
         title="Featured Projects"
         subtitle="A selection of automation systems, websites, and campaigns I've built."
