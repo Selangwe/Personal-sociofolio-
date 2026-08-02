@@ -27,7 +27,7 @@ export function ProfileHeader() {
 
   return (
     <header ref={containerRef} id="home" className="relative">
-      <div className="relative h-64 overflow-hidden sm:h-80 lg:h-96">
+      <div className="relative h-48 overflow-hidden sm:h-60 lg:h-72">
         <motion.div
           style={{ y: coverY, scale: coverScale }}
           className="absolute inset-0"
@@ -43,7 +43,7 @@ export function ProfileHeader() {
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="mx-auto -mt-20 max-w-7xl px-4 sm:px-6 lg:px-8"
+        className="mx-auto -mt-16 max-w-7xl px-4 pb-10 sm:px-6 lg:px-8"
       >
         <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-end sm:text-left">
           <motion.div
