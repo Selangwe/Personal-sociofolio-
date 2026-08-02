@@ -56,7 +56,7 @@ export function ProfileHeader() {
               <img
                 src={profile.avatar}
                 alt={`${profile.name} profile photo`}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-[center_10%]"
               />
             </div>
             <span
