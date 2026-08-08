@@ -27,9 +27,12 @@ audited).
 - Images are largely remote (Unsplash) + one local avatar under `/images/`.
 - Package name is the scaffold default (`"nextjs"`) `INFERRED` (bootstrapped from a starter).
 
-**Present but unused:**
-- `@supabase/supabase-js` is installed but **not referenced anywhere in code**
-  `VERIFIED` (unused) → likely a planned backend/auth/data layer `INFERRED`.
+**Backend (Supabase):**
+- `@supabase/supabase-js` powers **post likes and comments** via `lib/supabase.ts`
+  (null-safe client) and `components/feed/post-actions.tsx`. Schema/policies in
+  `supabase/schema.sql`. Configured through `NEXT_PUBLIC_SUPABASE_URL` /
+  `NEXT_PUBLIC_SUPABASE_ANON_KEY`; degrades gracefully to local-only likes when
+  unset. `VERIFIED`
 
 ## B. Tools used across portfolio work (VERIFIED as claimed)
 
