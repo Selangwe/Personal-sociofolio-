@@ -43,13 +43,14 @@ other app via the phone's native share sheet.
    dashboard-only, so you moderate from Supabase).
 3. Copy your API credentials from **Project Settings → API**.
 4. Locally: `cp .env.example .env.local` and fill in `NEXT_PUBLIC_SUPABASE_URL`
-   and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+   and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (the legacy
+   `NEXT_PUBLIC_SUPABASE_ANON_KEY` is also accepted).
 5. On Netlify: add those same two variables under **Site settings → Environment
    variables**, then redeploy.
 
-> The `anon` public key is safe to expose in the browser — access is governed by
-> the Row Level Security policies in `supabase/schema.sql`. Never put the
-> `service_role` key in `NEXT_PUBLIC_*` variables.
+> The publishable / `anon` key is safe to expose in the browser — access is
+> governed by the Row Level Security policies in `supabase/schema.sql`. Never put
+> the `secret` / `service_role` key in `NEXT_PUBLIC_*` variables.
 
 ### Moderating comments
 
