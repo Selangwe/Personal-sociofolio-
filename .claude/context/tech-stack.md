@@ -43,11 +43,12 @@ audited).
 | Web / hosting | Next.js, Tailwind, Netlify (this repo), Vercel (mentioned in copy) |
 | From GitHub bio | React, Node.js, AI-powered web apps |
 
-## C. Infrastructure added in-session
+## C. Related infrastructure (separate repo)
 
-- **Hostinger MCP servers** configured via project-scoped `.mcp.json` (hosting,
-  domains, DNS, reach, VPS, ecommerce). Token injected via `${HOSTINGER_API_TOKEN}`
-  from the environment — **no secret is committed**. See root `README.md`. `VERIFIED`
+- **Hostinger MCP servers** live in a dedicated repo: `Selangwe/hostinger-mcp`
+  (project-scoped `.mcp.json` for hosting, domains, DNS, reach, VPS, ecommerce).
+  Token injected via `${HOSTINGER_API_TOKEN}` from the environment — **no secret is
+  committed**. Kept out of this portfolio repo on purpose. `VERIFIED`
 
 ## Conventions to follow
 
