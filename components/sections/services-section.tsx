@@ -53,7 +53,7 @@ export function ServicesSection() {
               <div
                 className={`flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br ${service.color} text-white shadow-sm`}
               >
-                <Icon className="h-6 w-6" />
+                <Icon className="h-6 w-6" aria-hidden="true" />
               </div>
               <h3 className="mt-4 text-base font-semibold text-foreground">
                 {service.title}
@@ -67,7 +67,7 @@ export function ServicesSection() {
                     key={i}
                     className="flex items-center gap-2 text-xs text-muted-foreground"
                   >
-                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-primary" />
+                    <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
                     {benefit}
                   </li>
                 ))}
@@ -81,7 +81,7 @@ export function ServicesSection() {
                 className="mt-4 flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:gap-2.5"
               >
                 Get Started
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
               </button>
             </motion.div>
           );
