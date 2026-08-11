@@ -5,20 +5,25 @@ import { motion } from 'framer-motion';
 import {
   Newspaper,
   FolderKanban,
-  Youtube,
+  Video,
   Mail,
   Calendar,
   Sparkles,
   ArrowRight,
   CheckCircle2,
 } from 'lucide-react';
-import { posts, projects, upcomingEvents } from '@/lib/data';
+import { toast } from 'sonner';
+import { posts, profile, projects, upcomingEvents } from '@/lib/data';
+import { submitLead } from '@/lib/lead-capture';
 import { RippleButton } from '@/components/ui/ripple-button';
 
 export function RightSidebar() {
   const [subscribed, setSubscribed] = useState(false);
+  const [email, setEmail] = useState('');
+  const [pending, setPending] = useState(false);
   const featuredProject = projects[0];
   const recentPosts = posts.slice(0, 3);
+  const tiktok = profile.socials.find((s) => s.icon === 'tiktok');
 
   return (
     <motion.aside
@@ -95,19 +100,21 @@ export function RightSidebar() {
 
       <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
         <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground">
-          <Youtube className="h-4 w-4 text-primary" />
-          Latest Video
+          <Video className="h-4 w-4 text-primary" />
+          Latest Content
         </h4>
-        <div className="mt-3 aspect-video overflow-hidden rounded-lg bg-secondary">
-          <div className="flex h-full w-full items-center justify-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-              <Youtube className="h-6 w-6 text-primary" />
-            </div>
-          </div>
-        </div>
-        <p className="mt-2 text-xs font-medium text-foreground">
-          Building Your First AI Automation
+        <p className="mt-2 text-xs text-muted-foreground">
+          Short-form automation tips, posted regularly.
         </p>
+        <a
+          href={tiktok?.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 flex items-center justify-center gap-2 rounded-lg border border-border py-2 text-xs font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+        >
+          Watch on TikTok
+          <ArrowRight className="h-3 w-3" />
+        </a>
       </div>
 
       <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
@@ -125,15 +132,27 @@ export function RightSidebar() {
           </div>
         ) : (
           <form
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
-              setSubscribed(true);
+              if (pending) return;
+              setPending(true);
+              try {
+                await submitLead('newsletter', { email });
+                setSubscribed(true);
+                setEmail('');
+              } catch {
+                toast.error('Could not subscribe. Please try again.');
+              } finally {
+                setPending(false);
+              }
             }}
             className="mt-3 flex gap-2"
           >
             <input
               type="email"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
               className="h-9 flex-1 rounded-lg border border-border bg-background px-3 text-xs text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
             />
@@ -141,14 +160,16 @@ export function RightSidebar() {
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.97 }}
               type="submit"
-              className="rounded-lg bg-primary px-3 text-xs font-medium text-primary-foreground hover:bg-primary/90"
+              disabled={pending}
+              className="rounded-lg bg-primary px-3 text-xs font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-60"
             >
-              Join
+              {pending ? '...' : 'Join'}
             </motion.button>
           </form>
         )}
       </div>
 
+      {upcomingEvents.length > 0 && (
       <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
         <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground">
           <Calendar className="h-4 w-4 text-primary" />
@@ -172,6 +193,7 @@ export function RightSidebar() {
           ))}
         </div>
       </div>
+      )}
 
       <div className="rounded-xl bg-gradient-to-br from-primary to-accent p-5 text-primary-foreground shadow-lg">
         <h4 className="text-sm font-bold">Ready to automate?</h4>

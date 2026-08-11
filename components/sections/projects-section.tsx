@@ -64,17 +64,29 @@ export function ProjectsSection() {
                 ))}
               </div>
 
-              <button
-                onClick={() =>
-                  document
-                    .getElementById('contact')
-                    ?.scrollIntoView({ behavior: 'smooth' })
-                }
-                className="mt-4 flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:gap-2.5"
-              >
-                View Project
-                <ArrowRight className="h-4 w-4" />
-              </button>
+              {project.link ? (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:gap-2.5"
+                >
+                  View Project
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              ) : (
+                <button
+                  onClick={() =>
+                    document
+                      .getElementById('contact')
+                      ?.scrollIntoView({ behavior: 'smooth' })
+                  }
+                  className="mt-4 flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:gap-2.5"
+                >
+                  Discuss a project like this
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              )}
             </div>
           </motion.div>
         ))}

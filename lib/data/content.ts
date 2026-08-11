@@ -54,6 +54,7 @@ export const navItems: NavItem[] = [
   { label: 'Projects', href: 'projects', icon: 'FolderKanban' },
   { label: 'Services', href: 'services', icon: 'Sparkles' },
   { label: 'Testimonials', href: 'testimonials', icon: 'Star' },
+  { label: 'Resources', href: 'resources', icon: 'Download' },
   { label: 'Contact', href: 'contact', icon: 'Mail' },
 ];
 
@@ -417,20 +418,8 @@ export const posts: Post[] = [
     shares: 15,
     category: 'Cold Email Lessons',
   },
-  {
-    id: 'post-3',
-    type: 'youtube',
-    timestamp: '1 week ago',
-    title: 'Building Your First AI Automation with Make.com',
-    content:
-      'New tutorial is live! In this video I walk through building a complete AI automation that reads incoming emails, categorizes them, and drafts responses automatically. Perfect for anyone getting started with AI automation.',
-    youtubeId: 'dQw4w9WgXcQ',
-    tags: ['AI Tutorial', 'Make.com', 'Tutorial'],
-    likes: 215,
-    comments: 52,
-    shares: 41,
-    category: 'AI Tutorials',
-  },
+  // A 'youtube' post is supported by PostCard — add one back with a real video ID:
+  // { id: 'post-3', type: 'youtube', youtubeId: '<real-id>', ... }
   {
     id: 'post-4',
     type: 'text',
@@ -487,8 +476,8 @@ export const resources: Resource[] = [
       '50+ ready-to-use AI prompts for marketing, sales, content creation, and operations. Copy, paste, and scale.',
     type: 'Prompt Library',
     icon: 'Sparkles',
-    link: '#',
-    downloads: '1.2K',
+    link: '/resources/ai-prompt-library.pdf',
+    pages: '31 pages',
   },
   {
     id: 'res-2',
@@ -497,8 +486,8 @@ export const resources: Resource[] = [
       'A step-by-step guide to setting up cold email infrastructure that lands in the inbox and gets replies.',
     type: 'Lead Magnet',
     icon: 'Mail',
-    link: '#',
-    downloads: '850',
+    link: '/resources/cold-email-playbook.pdf',
+    pages: '20 pages',
   },
   {
     id: 'res-3',
@@ -507,8 +496,8 @@ export const resources: Resource[] = [
       'The exact 47-point checklist I use to set up GoHighLevel accounts for clients from zero to launch.',
     type: 'Lead Magnet',
     icon: 'ListChecks',
-    link: '#',
-    downloads: '2.1K',
+    link: '/resources/ghl-setup-checklist.pdf',
+    pages: '9 pages',
   },
   {
     id: 'res-4',
@@ -517,8 +506,8 @@ export const resources: Resource[] = [
       '12 pre-built Make.com and Zapier workflow templates you can import and customize for your business.',
     type: 'Template Pack',
     icon: 'Workflow',
-    link: '#',
-    downloads: '640',
+    link: '/resources/automation-workflow-templates.pdf',
+    pages: '15 pages',
   },
 ];
 
@@ -589,20 +578,10 @@ export const coreValues: CoreValue[] = [
   },
 ];
 
-export const upcomingEvents = [
-  {
-    title: 'Free AI Automation Masterclass',
-    date: 'Jul 15, 2025',
-    type: 'Webinar',
-  },
-  {
-    title: 'GoHighLevel Setup Workshop',
-    date: 'Jul 22, 2025',
-    type: 'Workshop',
-  },
-  {
-    title: 'Cold Email Bootcamp',
-    date: 'Aug 5, 2025',
-    type: 'Bootcamp',
-  },
-];
+/**
+ * Add real, dated events here and the "Upcoming Events" card in the right
+ * sidebar renders itself automatically. Left empty deliberately — the card
+ * hides rather than advertising events that have already passed.
+ */
+export const upcomingEvents: { title: string; date: string; type: string }[] =
+  [];

@@ -107,7 +107,7 @@ export interface Resource {
   type: string;
   icon: string;
   link: string;
-  downloads?: string;
+  pages?: string;
 }
 
 export interface TimelineEvent {

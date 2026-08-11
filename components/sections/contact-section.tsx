@@ -15,6 +15,7 @@ import {
   Linkedin,
 } from 'lucide-react';
 import { profile } from '@/lib/data';
+import { submitLead } from '@/lib/lead-capture';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { RippleButton } from '@/components/ui/ripple-button';
 import { toast } from 'sonner';
@@ -40,11 +41,17 @@ export function ContactSection() {
   });
 
   const onSubmit = async (data: FormData) => {
-    await new Promise((r) => setTimeout(r, 800));
-    setSubmitted(true);
-    toast.success('Message sent! I\'ll get back to you soon.');
-    reset();
-    setTimeout(() => setSubmitted(false), 3000);
+    try {
+      await submitLead('contact', data);
+      setSubmitted(true);
+      toast.success('Message sent! I\'ll get back to you soon.');
+      reset();
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch {
+      toast.error(
+        `Something went wrong. Email me directly at ${profile.email}.`,
+      );
+    }
   };
 
   return (

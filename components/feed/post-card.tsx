@@ -6,12 +6,11 @@ import {
   Heart,
   MessageCircle,
   Share2,
-  MoreHorizontal,
   BadgeCheck,
   ChevronLeft,
   ChevronRight,
-  Play,
 } from 'lucide-react';
+import { toast } from 'sonner';
 import type { Post } from '@/lib/types';
 import { profile } from '@/lib/data';
 import { SkillBadge } from '@/components/ui/skill-badge';
@@ -27,8 +26,26 @@ export function PostCard({ post, index }: PostCardProps) {
 
   const likeCount = post.likes + (liked ? 1 : 0);
 
+  /** Uses the native share sheet on mobile, falls back to copying the link. */
+  const handleShare = async () => {
+    const url = `${window.location.origin}/#${post.id}`;
+    const shareData = { title: post.title || profile.name, url };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      toast.success('Link copied to clipboard');
+    } catch {
+      // The user dismissing the share sheet lands here — nothing to report.
+    }
+  };
+
   return (
     <motion.article
+      id={post.id}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
@@ -56,9 +73,6 @@ export function PostCard({ post, index }: PostCardProps) {
             {post.timestamp}
           </span>
         </div>
-        <button className="rounded-lg p-2 text-muted-foreground hover:bg-secondary">
-          <MoreHorizontal className="h-4 w-4" />
-        </button>
       </div>
 
       <div className="px-4 pb-3">
@@ -127,15 +141,15 @@ export function PostCard({ post, index }: PostCardProps) {
       )}
 
       {post.youtubeId && (
-        <div className="relative aspect-video w-full bg-black">
-          <div className="flex h-full w-full items-center justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-600 text-white shadow-lg">
-              <Play className="h-7 w-7 fill-white" />
-            </div>
-          </div>
-          <span className="absolute bottom-2 right-2 rounded bg-black/70 px-2 py-0.5 text-xs text-white">
-            YouTube
-          </span>
+        <div className="aspect-video w-full bg-black">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${post.youtubeId}`}
+            title={post.title || 'YouTube video'}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+            className="h-full w-full border-0"
+          />
         </div>
       )}
 
@@ -171,11 +185,21 @@ export function PostCard({ post, index }: PostCardProps) {
           <Heart className={`h-4 w-4 ${liked ? 'fill-red-500' : ''}`} />
           Like
         </motion.button>
-        <button className="flex flex-1 items-center justify-center gap-2 rounded-lg py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary">
+        <button
+          onClick={() =>
+            document
+              .getElementById('contact')
+              ?.scrollIntoView({ behavior: 'smooth' })
+          }
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary"
+        >
           <MessageCircle className="h-4 w-4" />
           Comment
         </button>
-        <button className="flex flex-1 items-center justify-center gap-2 rounded-lg py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary">
+        <button
+          onClick={handleShare}
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary"
+        >
           <Share2 className="h-4 w-4" />
           Share
         </button>

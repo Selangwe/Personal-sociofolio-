@@ -11,6 +11,7 @@ import {
   Star,
   Mail,
   Calendar,
+  Download,
 } from 'lucide-react';
 import { navItems } from '@/lib/data';
 import { cn } from '@/lib/utils';
@@ -23,6 +24,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Sparkles,
   Star,
   Mail,
+  Download,
 };
 
 export function MobileNav() {

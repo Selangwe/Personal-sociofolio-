@@ -6,6 +6,7 @@ import { Menu, X, Calendar } from 'lucide-react';
 import { navItems } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { RippleButton } from '@/components/ui/ripple-button';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -96,14 +97,17 @@ export function Navbar() {
             ))}
           </div>
 
-          <div className="hidden md:block">
-            <RippleButton
-              size="sm"
-              href="https://calendly.com/selangwe19u/30min"
-            >
-              <Calendar className="h-4 w-4" />
-              Book a Call
-            </RippleButton>
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+            <div className="hidden md:block">
+              <RippleButton
+                size="sm"
+                href="https://calendly.com/selangwe19u/30min"
+              >
+                <Calendar className="h-4 w-4" />
+                Book a Call
+              </RippleButton>
+            </div>
           </div>
 
           <button
