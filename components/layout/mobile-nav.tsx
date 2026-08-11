@@ -72,7 +72,7 @@ export function MobileNav() {
         )}
       </AnimatePresence>
 
-      <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border glass md:hidden">
+      <nav aria-label="Mobile navigation" className="fixed bottom-0 left-0 right-0 z-40 border-t border-border glass md:hidden">
         <div className="flex items-center justify-around px-2 py-2">
           {mobileItems.map((item) => {
             const Icon = iconMap[item.icon] || Home;
@@ -88,7 +88,7 @@ export function MobileNav() {
                     : 'text-muted-foreground',
                 )}
               >
-                <Icon className="h-5 w-5" />
+                <Icon className="h-5 w-5" aria-hidden="true" />
                 <span>{item.label}</span>
               </button>
             );

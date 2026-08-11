@@ -21,7 +21,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export function ResourcesSection() {
   return (
-    <section id="resources" className="scroll-mt-32 py-12">
+    <section id="resources" aria-label="Free resources" className="scroll-mt-32 py-12">
       <SectionHeading
         title="Resources"
         subtitle="Free tools, templates, and guides to help you automate and grow."

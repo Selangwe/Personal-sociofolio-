@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { Navbar } from '@/components/layout/navbar';
 import { MobileNav } from '@/components/layout/mobile-nav';
-import { NavigationTabs } from '@/components/layout/navigation-tabs';
 import { Footer } from '@/components/layout/footer';
 import { ProfileHeader } from '@/components/profile/profile-header';
 import { ProfileSidebar } from '@/components/sidebar/profile-sidebar';
@@ -21,7 +20,6 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <NavigationTabs />
 
       <motion.main
         initial={{ opacity: 0 }}
@@ -32,7 +30,9 @@ export default function Home() {
 
         <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[260px_1fr] xl:grid-cols-[260px_1fr_300px]">
-            <ProfileSidebar />
+            <aside aria-label="Profile information">
+              <ProfileSidebar />
+            </aside>
 
             <div className="min-w-0 space-y-2">
               <ContentFeed />
@@ -45,7 +45,9 @@ export default function Home() {
               <ContactSection />
             </div>
 
-            <RightSidebar />
+            <aside aria-label="Additional information">
+              <RightSidebar />
+            </aside>
           </div>
         </div>
 

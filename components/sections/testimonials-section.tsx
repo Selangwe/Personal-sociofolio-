@@ -28,7 +28,7 @@ export function TestimonialsSection() {
   }, [emblaApi]);
 
   return (
-    <section id="testimonials" className="scroll-mt-32 py-12">
+    <section id="testimonials" aria-label="Client testimonials" className="scroll-mt-32 py-12">
       <SectionHeading
         title="Testimonials"
         subtitle="What clients say about working with me."

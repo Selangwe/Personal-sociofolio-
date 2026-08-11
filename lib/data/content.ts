@@ -25,8 +25,7 @@ export const profile: Profile = {
   website: 'https://samme-samuel.coreflareagency.com/',
   calendly: 'https://calendly.com/selangwe19u/30min',
   resumeUrl: '/resume.pdf',
-  avatar:
-    'https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&h=400&fit=crop',
+  avatar: '/images/Generated_Image_November_05,_2025_-_6_20AM copy.png',
   cover:
     'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&h=500&fit=crop',
   verified: true,

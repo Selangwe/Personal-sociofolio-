@@ -48,7 +48,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-32 py-12">
+    <section id="contact" aria-label="Contact Samme Samuel" className="scroll-mt-32 py-12">
       <SectionHeading
         title="Get in Touch"
         subtitle="Have a project in mind? Let's talk about how I can help your business grow."

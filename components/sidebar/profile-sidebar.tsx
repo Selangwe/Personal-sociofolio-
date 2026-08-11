@@ -29,7 +29,7 @@ export function ProfileSidebar() {
         <div className="flex items-center gap-3">
           <img
             src={profile.avatar}
-            alt={profile.name}
+            alt={`${profile.name} profile photo`}
             className="h-14 w-14 rounded-full border-2 border-primary object-cover"
           />
           <div>
@@ -40,16 +40,17 @@ export function ProfileSidebar() {
           </div>
         </div>
 
-        <div className="mt-4 space-y-3 text-sm">
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <MapPin className="h-4 w-4 shrink-0 text-primary" />
+        <div className="mt-4 space-y-3 text-sm" role="list">
+          <div className="flex items-center gap-2 text-muted-foreground" role="listitem">
+            <MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
             <span>{profile.location}</span>
           </div>
           <a
             href={`mailto:${profile.email}`}
             className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
+            role="listitem"
           >
-            <Mail className="h-4 w-4 shrink-0 text-primary" />
+            <Mail className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
             <span className="truncate">{profile.email}</span>
           </a>
           <a
@@ -57,16 +58,17 @@ export function ProfileSidebar() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
+            role="listitem"
           >
-            <Globe className="h-4 w-4 shrink-0 text-primary" />
+            <Globe className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
             <span className="truncate">Personal Website</span>
           </a>
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Clock className="h-4 w-4 shrink-0 text-primary" />
+          <div className="flex items-center gap-2 text-muted-foreground" role="listitem">
+            <Clock className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
             <span>{profile.availability}</span>
           </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Languages className="h-4 w-4 shrink-0 text-primary" />
+          <div className="flex items-center gap-2 text-muted-foreground" role="listitem">
+            <Languages className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
             <span>{profile.languages.join(' & ')}</span>
           </div>
         </div>

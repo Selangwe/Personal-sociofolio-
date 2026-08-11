@@ -20,7 +20,7 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-4">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground" aria-hidden="true">
                 SS
               </div>
               <span className="text-sm font-semibold text-foreground">
@@ -52,7 +52,7 @@ export function Footer() {
 
           <div>
             <h4 className="text-sm font-semibold text-foreground">Navigation</h4>
-            <ul className="mt-3 space-y-2">
+            <ul className="mt-3 space-y-2" role="list">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <button
@@ -68,7 +68,7 @@ export function Footer() {
 
           <div>
             <h4 className="text-sm font-semibold text-foreground">Services</h4>
-            <ul className="mt-3 space-y-2">
+            <ul className="mt-3 space-y-2" role="list">
               <li className="text-sm text-muted-foreground">AI Automation</li>
               <li className="text-sm text-muted-foreground">Website Development</li>
               <li className="text-sm text-muted-foreground">GoHighLevel Setup</li>
@@ -89,6 +89,7 @@ export function Footer() {
               <input
                 type="email"
                 placeholder="your@email.com"
+                aria-label="Email address for newsletter"
                 className="h-10 flex-1 rounded-lg border border-border bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
               />
               <motion.button

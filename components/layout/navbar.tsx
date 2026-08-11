@@ -39,10 +39,21 @@ export function Navbar() {
 
   return (
     <>
+      <a
+        href="#home"
+        onClick={(e) => {
+          e.preventDefault();
+          scrollToSection('home');
+        }}
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
+      >
+        Skip to content
+      </a>
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
+        aria-label="Main navigation"
         className={cn(
           'fixed left-0 right-0 top-0 z-50 transition-all duration-300',
           scrolled
@@ -53,14 +64,12 @@ export function Navbar() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <button
             onClick={() => scrollToSection('home')}
+            aria-label="Go to home"
             className="flex items-center gap-2"
           >
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
               SS
             </div>
-            <span className="hidden text-sm font-semibold text-foreground sm:block">
-              Samme Samuel
-            </span>
           </button>
 
           <div className="hidden items-center gap-1 md:flex">
@@ -68,6 +77,7 @@ export function Navbar() {
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
+                aria-current={activeSection === item.href ? 'page' : undefined}
                 className={cn(
                   'relative rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                   activeSection === item.href
@@ -98,8 +108,10 @@ export function Navbar() {
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="rounded-lg p-2 text-foreground hover:bg-secondary md:hidden"
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
+            className="rounded-lg p-2 text-foreground hover:bg-secondary md:hidden"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -107,6 +119,7 @@ export function Navbar() {
 
         {mobileOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -117,6 +130,7 @@ export function Navbar() {
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
+                  aria-current={activeSection === item.href ? 'page' : undefined}
                   className={cn(
                     'block w-full rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors',
                     activeSection === item.href
