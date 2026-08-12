@@ -1,10 +1,10 @@
 'use client';
 
 import { Newspaper } from 'lucide-react';
-import { posts } from '@/lib/data';
+import type { Post } from '@/lib/types';
 import { PostCard } from './post-card';
 
-export function ContentFeed() {
+export function ContentFeed({ posts }: { posts: Post[] }) {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2">

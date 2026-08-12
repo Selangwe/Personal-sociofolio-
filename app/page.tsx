@@ -1,9 +1,7 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { Navbar } from '@/components/layout/navbar';
 import { MobileNav } from '@/components/layout/mobile-nav';
 import { Footer } from '@/components/layout/footer';
+import { PageTransition } from '@/components/layout/page-transition';
 import { ProfileHeader } from '@/components/profile/profile-header';
 import { ProfileSidebar } from '@/components/sidebar/profile-sidebar';
 import { RightSidebar } from '@/components/sidebar/right-sidebar';
@@ -15,17 +13,23 @@ import { ProjectsSection } from '@/components/sections/projects-section';
 import { TestimonialsSection } from '@/components/sections/testimonials-section';
 import { ResourcesSection } from '@/components/sections/resources-section';
 import { ContactSection } from '@/components/sections/contact-section';
+import { getPublishedPosts } from '@/lib/posts';
 
-export default function Home() {
+/**
+ * Re-fetch posts at most once a minute. Publishing from /admin shows up within
+ * that window without a redeploy, and visitors still get a cached static page.
+ */
+export const revalidate = 60;
+
+export default async function Home() {
+  // Fetched on the server so post text is in the HTML that crawlers see.
+  const posts = await getPublishedPosts();
+
   return (
     <>
       <Navbar />
 
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
+      <PageTransition>
         <ProfileHeader />
 
         <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
@@ -35,7 +39,7 @@ export default function Home() {
             </aside>
 
             <div className="min-w-0 space-y-2">
-              <ContentFeed />
+              <ContentFeed posts={posts} />
               <AboutSection />
               <ExperienceSection />
               <ServicesSection />
@@ -46,13 +50,13 @@ export default function Home() {
             </div>
 
             <aside aria-label="Additional information">
-              <RightSidebar />
+              <RightSidebar posts={posts} />
             </aside>
           </div>
         </div>
 
         <Footer />
-      </motion.main>
+      </PageTransition>
 
       <MobileNav />
     </>

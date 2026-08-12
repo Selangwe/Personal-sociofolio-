@@ -13,11 +13,15 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { posts, profile, projects, upcomingEvents } from '@/lib/data';
+import { profile, projects, upcomingEvents } from '@/lib/data';
 import { submitLead } from '@/lib/lead-capture';
+import type { Post } from '@/lib/types';
 import { RippleButton } from '@/components/ui/ripple-button';
 
-export function RightSidebar() {
+// Posts arrive as a prop rather than being imported, so this card and the main
+// feed always show the same set — importing the static array here would keep
+// showing seed data after the feed moved to the database.
+export function RightSidebar({ posts }: { posts: Post[] }) {
   const [subscribed, setSubscribed] = useState(false);
   const [email, setEmail] = useState('');
   const [pending, setPending] = useState(false);

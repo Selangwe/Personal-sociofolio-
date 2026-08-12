@@ -7,8 +7,10 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      // Netlify's form-definition stub — no reason for it to be indexed.
-      disallow: '/__forms.html',
+      // Keeping the dashboard and the lead endpoint out of search results.
+      // This is tidiness, not access control — that lives in the database's
+      // row-level policies.
+      disallow: ['/admin', '/api/'],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };
