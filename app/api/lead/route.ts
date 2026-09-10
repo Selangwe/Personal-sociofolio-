@@ -1,14 +1,20 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { getAdminClient } from '@/lib/supabase/admin';
+import { insertLead } from '@/lib/leads';
 
 /**
- * Receives every lead the site captures.
+ * Receives every lead the site's forms capture.
  *
  * Writes run server-side with the service role key because `leads` grants no
  * insert policy to anonymous visitors — an anon-writable table is an open spam
  * endpoint with nowhere to validate. Doing it here also keeps the table shape
  * off the client and gives a home for email notifications later.
+ *
+ * The insert itself lives in `lib/leads.ts`, shared with the chat route.
+ *
+ * Note the enum below has three values, not four. `'chat'` exists in `LeadForm`
+ * but is deliberately unreachable from this unauthenticated endpoint — otherwise
+ * anyone could forge a pre-qualified lead with a one-line curl.
  */
 
 // Touches a database on every call; must never be prerendered or cached.
@@ -43,21 +49,20 @@ export async function POST(request: Request) {
   // Silently accept bot submissions — an error just tells them to retry.
   if (botField) return new NextResponse(null, { status: 204 });
 
-  const supabase = getAdminClient();
-  if (!supabase) {
-    console.error('Lead dropped: Supabase env vars are not configured.');
-    return NextResponse.json(
-      { error: 'Lead capture is not configured.' },
-      { status: 503 },
-    );
-  }
+  const result = await insertLead(lead);
 
-  const { error } = await supabase.from('leads').insert(lead);
-
-  if (error) {
-    // Log the real reason, but never echo database internals to the client.
-    console.error('Lead insert failed:', error.message);
-    return NextResponse.json({ error: 'Could not save submission.' }, { status: 500 });
+  if (!result.ok) {
+    // `insertLead` already logged the real reason; never echo database
+    // internals to the client.
+    return result.reason === 'unconfigured'
+      ? NextResponse.json(
+          { error: 'Lead capture is not configured.' },
+          { status: 503 },
+        )
+      : NextResponse.json(
+          { error: 'Could not save submission.' },
+          { status: 500 },
+        );
   }
 
   return new NextResponse(null, { status: 204 });

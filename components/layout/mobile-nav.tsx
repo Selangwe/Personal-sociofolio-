@@ -13,7 +13,7 @@ import {
   Calendar,
   Download,
 } from 'lucide-react';
-import { navItems } from '@/lib/data';
+import { navItems, profile } from '@/lib/data';
 import { cn } from '@/lib/utils';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -59,7 +59,7 @@ export function MobileNav() {
       <AnimatePresence>
         {visible && (
           <motion.a
-            href="https://calendly.com/selangwe19u/30min"
+            href={profile.calendly}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ scale: 0, opacity: 0 }}

@@ -25,12 +25,16 @@ import {
 
 interface Lead {
   id: string;
-  form: 'contact' | 'newsletter' | 'resource-download';
+  form: 'contact' | 'newsletter' | 'resource-download' | 'chat';
   email: string;
   name: string | null;
   subject: string | null;
   message: string | null;
   resource: string | null;
+  /** Chat leads only: the service their need mapped to. */
+  service: string | null;
+  /** Chat leads only: how soon they want to start. */
+  timeline: string | null;
   created_at: string;
 }
 
@@ -38,6 +42,7 @@ const FORM_LABELS: Record<Lead['form'], string> = {
   contact: 'Contact',
   newsletter: 'Newsletter',
   'resource-download': 'Resource',
+  chat: 'Chat',
 };
 
 /** Escapes a value for CSV: quote it and double any inner quotes. */
@@ -83,7 +88,17 @@ export function LeadList() {
       return;
     }
 
-    const header = ['Date', 'Form', 'Name', 'Email', 'Subject', 'Message', 'Resource'];
+    const header = [
+      'Date',
+      'Form',
+      'Name',
+      'Email',
+      'Subject',
+      'Message',
+      'Resource',
+      'Service',
+      'Timeline',
+    ];
     const rows = visible.map((lead) =>
       [
         csvCell(format(new Date(lead.created_at), 'yyyy-MM-dd HH:mm')),
@@ -93,6 +108,8 @@ export function LeadList() {
         csvCell(lead.subject),
         csvCell(lead.message),
         csvCell(lead.resource),
+        csvCell(lead.service),
+        csvCell(lead.timeline),
       ].join(','),
     );
 
@@ -125,6 +142,7 @@ export function LeadList() {
               <SelectItem value="contact">Contact</SelectItem>
               <SelectItem value="newsletter">Newsletter</SelectItem>
               <SelectItem value="resource-download">Resource</SelectItem>
+              <SelectItem value="chat">Chat</SelectItem>
             </SelectContent>
           </Select>
           <Button variant="outline" size="sm" onClick={load} aria-label="Refresh leads">

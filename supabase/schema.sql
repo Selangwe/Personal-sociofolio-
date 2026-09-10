@@ -20,16 +20,27 @@
 
 
 -- ----------------------------------------------------------------------------
---  LEADS — contact form, newsletter, and resource-download captures
+--  LEADS — contact form, newsletter, resource-download, and chat captures
 -- ----------------------------------------------------------------------------
+--
+--  NOTE: `create table if not exists` is a no-op on an already-provisioned
+--  database. If you are upgrading rather than provisioning fresh, run
+--  supabase/migrations/2026-08-22-chat-widget.sql instead — editing the body
+--  below will not add the columns to a table that already exists.
+--
 create table if not exists public.leads (
   id         uuid primary key default gen_random_uuid(),
-  form       text not null check (form in ('contact','newsletter','resource-download')),
+  form       text not null
+             constraint leads_form_check
+             check (form in ('contact','newsletter','resource-download','chat')),
   email      text not null,
   name       text,
   subject    text,
   message    text,
   resource   text,
+  -- Chat-qualified leads only.
+  service    text,
+  timeline   text,
   created_at timestamptz not null default now()
 );
 

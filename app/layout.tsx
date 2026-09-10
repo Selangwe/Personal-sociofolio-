@@ -3,11 +3,13 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/theme-provider';
+import { ChatWidget } from '@/components/chat/chat-widget';
+import { SITE_URL } from '@/lib/site-config';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://samme-samuel.coreflareagency.com'),
+  metadataBase: new URL(SITE_URL),
   title: 'Samme Samuel | GHL Expert, AI Engineer & Virtual Assistant',
   description:
     'Helping businesses automate operations, generate leads, and scale with AI, GoHighLevel, and smart systems. Book a consultation today.',
@@ -56,6 +58,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <ChatWidget />
           <Toaster position="bottom-right" />
         </ThemeProvider>
       </body>
